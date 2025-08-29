@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris Flower Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: 500;
+            color: #444444;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            border-radius: 8px;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 IRIS Flower Predictor</h1>
+        <p>Enter the flower measurements to predict its species</p>
+
+        <form action="/predict" method="post">
+            <label for="sepal_length">Sepal Length (cm):</label>
+            <input type="text" name="sepal_length" required>
+
+            <label for="sepal_width">Sepal Width (cm):</label>
+            <input type="text" name="sepal_width" required>
+
+            <label for="petal_length">Petal Length (cm):</label>
+            <input type="text" name="petal_length" required>
+
+            <label for="petal_width">Petal Width (cm):</label>
+            <input type="text" name="petal_width" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if data %}
+            <div class="result">
+                <h3>Prediction Result</h3>
+                <p><strong>{{ data }}</strong></p>
+            </div>
+
+            {% if data=="setosa" %}
+                <img src="https://cdn-uploads.huggingface.co/production/uploads/6474405f90330355db146c76/iVXMOLPdx1ctqWnvnFED_.png" alt="IRIS SETOSA">
+            {% elif data=="versicolor" %}
+                <img src="https://cdn.glitch.global/8599b2d2-58ab-4d42-98f5-97fa4c6bad04/Iris%20versicolor.png?v=1680866854461" alt="IRIS VERSICOLOR">
+            {% elif data=="virginica" %}
+                <img src="https://cdn.glitch.global/8599b2d2-58ab-4d42-98f5-97fa4c6bad04/Iris%20Virginica.png?v=1680866857022" alt="IRIS VIRGINICA">
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
